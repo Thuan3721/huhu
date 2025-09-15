@@ -37,7 +37,7 @@
             cboNhanVien = new ComboBox();
             cboNhaCungCap = new ComboBox();
             DataGridViewHoaDonNhap = new DataGridView();
-            txtMaHD = new TextBox();
+            txtMaHDN = new TextBox();
             txtTongTien = new TextBox();
             txtGhiChu = new TextBox();
             label6 = new Label();
@@ -64,9 +64,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(147, 95);
             label2.Name = "label2";
-            label2.Size = new Size(94, 20);
+            label2.Size = new Size(134, 20);
             label2.TabIndex = 1;
-            label2.Text = "Mã Hóa Đơn";
+            label2.Text = "Mã Hóa Đơn Nhập";
             // 
             // label3
             // 
@@ -126,12 +126,12 @@
             DataGridViewHoaDonNhap.Size = new Size(1124, 206);
             DataGridViewHoaDonNhap.TabIndex = 8;
             // 
-            // txtMaHD
+            // txtMaHDN
             // 
-            txtMaHD.Location = new Point(297, 92);
-            txtMaHD.Name = "txtMaHD";
-            txtMaHD.Size = new Size(219, 27);
-            txtMaHD.TabIndex = 9;
+            txtMaHDN.Location = new Point(297, 92);
+            txtMaHDN.Name = "txtMaHDN";
+            txtMaHDN.Size = new Size(219, 27);
+            txtMaHDN.TabIndex = 9;
             // 
             // txtTongTien
             // 
@@ -152,9 +152,9 @@
             label6.AutoSize = true;
             label6.Location = new Point(708, 178);
             label6.Name = "label6";
-            label6.Size = new Size(77, 20);
+            label6.Size = new Size(102, 20);
             label6.TabIndex = 12;
-            label6.Text = "Nhân Viên";
+            label6.Text = "Mã Nhân Viên";
             // 
             // label7
             // 
@@ -173,6 +173,7 @@
             bttThem.TabIndex = 14;
             bttThem.Text = "Thêm";
             bttThem.UseVisualStyleBackColor = true;
+            bttThem.Click += bttThem_Click;
             // 
             // bttSua
             // 
@@ -182,6 +183,7 @@
             bttSua.TabIndex = 15;
             bttSua.Text = "Sửa";
             bttSua.UseVisualStyleBackColor = true;
+            bttSua.Click += bttSua_Click;
             // 
             // bttXoa
             // 
@@ -191,6 +193,7 @@
             bttXoa.TabIndex = 16;
             bttXoa.Text = "Xóa";
             bttXoa.UseVisualStyleBackColor = true;
+            bttXoa.Click += bttXoa_Click;
             // 
             // bttThoat
             // 
@@ -215,7 +218,7 @@
             Controls.Add(label6);
             Controls.Add(txtGhiChu);
             Controls.Add(txtTongTien);
-            Controls.Add(txtMaHD);
+            Controls.Add(txtMaHDN);
             Controls.Add(DataGridViewHoaDonNhap);
             Controls.Add(cboNhaCungCap);
             Controls.Add(cboNhanVien);
@@ -243,7 +246,7 @@
         private ComboBox cboNhanVien;
         private ComboBox cboNhaCungCap;
         private DataGridView DataGridViewHoaDonNhap;
-        private TextBox txtMaHD;
+        private TextBox txtMaHDN;
         private TextBox txtTongTien;
         private TextBox txtGhiChu;
         private Label label6;

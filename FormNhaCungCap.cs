@@ -11,7 +11,7 @@ namespace baidaynay
         SqlDataAdapter da;
         DataTable dt;
         SqlCommand cmd;
-        string connectionString = @"Data Source=.;Initial Catalog=QuanLyHT;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+        string connectionString = @"Data Source= THUANN;Initial Catalog=QuanLyHT;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
 
 
         public FormNhaCungCap()
@@ -30,7 +30,11 @@ namespace baidaynay
         {
             try
             {
+                MessageBox.Show("111111111111 ");
+
                 conn.Open();
+                Console.Write("2222222222222");
+
                 string sql = "SELECT * FROM NhaCungCap";  // Lấy tất cả dữ liệu
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
@@ -39,6 +43,8 @@ namespace baidaynay
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
+
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
             finally
@@ -133,6 +139,10 @@ namespace baidaynay
                 }
 
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
 
         }
 
@@ -140,39 +150,41 @@ namespace baidaynay
         private void bttXoa_Click(object sender, EventArgs e)
         {
             try
-            { 
-
+            {
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                connection.Open();
-                string query = "DELETE FROM NhaCungCap WHERE MaNCC = @MaNCC";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@MaNCC", (txtMaNCC.Text));
+                    connection.Open();
+                    string query = "DELETE FROM NhaCungCap WHERE MaNCC = @MaNCC";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@MaNCC", (txtMaNCC.Text));
 
-                int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected > 0)
-                {
-                    MessageBox.Show("Xóa nhà cung cấp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // Làm mới DataGridView
-                    // Xóa trắng các ô nhập liệu sau khi xóa (tùy chọn)
-                    txtMaNCC.Clear();
-                    txtTenNCC.Clear();
-                    txtSDT.Clear();
-                    txtDiaChi.Clear();
-                    txtEmail.Clear();
-                    txtGhiChu.Clear();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Xóa nhà cung cấp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Làm mới DataGridView
+                        // Xóa trắng các ô nhập liệu sau khi xóa (tùy chọn)
+                        txtMaNCC.Clear();
+                        txtTenNCC.Clear();
+                        txtSDT.Clear();
+                        txtDiaChi.Clear();
+                        txtEmail.Clear();
+                        txtGhiChu.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa nhà cung cấp thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Xóa nhà cung cấp thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
 
-        
-
+       
         private void dataGridViewNhaCungCap_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -192,10 +204,4 @@ namespace baidaynay
         }
     }
 }
-
-        
-
-
-
-
 
