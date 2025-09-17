@@ -24,12 +24,11 @@ namespace WinFormsApp2
         {
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             // Gán danh sách vào DataGridView
-            txtGhiChu.DataSource = null;
-            txtGhiChu.DataSource = danhSach;
+            dataGridView.DataSource = null;
+            dataGridView.DataSource = danhSach;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -39,7 +38,7 @@ namespace WinFormsApp2
                 IDLoaiThuoc = int.Parse(txtLoaiThuoc.Text),
                 MaLoai = txtMaLoai.Text,
                 TenLoai = txtTenLoai.Text,
-                GhiChu = txtGhiChu.Text
+                GhiChu = dataGridView.Text
             };
             danhSach.Add(lt);
             RefreshGrid();
@@ -89,7 +88,7 @@ namespace WinFormsApp2
                     command.Parameters.AddWithValue("@IDLoaiThuoc", txtLoaiThuoc.Text);
                     command.Parameters.AddWithValue("@MaLoaiThuoc", txtMaLoai.Text);
                     command.Parameters.AddWithValue("@TenLoaiThuoc", txtTenLoai.Text);
-                    command.Parameters.AddWithValue("@GhiChu", txtGhiChu.Text);
+                    command.Parameters.AddWithValue("@GhiChu", dataGridView.Text);
 
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)
@@ -128,12 +127,17 @@ namespace WinFormsApp2
                     {
                         MessageBox.Show("Xóa sản phẩm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearForm();
+                    }
                     else
-                        {
-                            MessageBox.Show("Xóa sản phẩm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                    {
+                        MessageBox.Show("Xóa sản phẩm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+                }
+                catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật: " + ex.Message);
+            }
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
@@ -151,14 +155,14 @@ namespace WinFormsApp2
                 txtLoaiThuoc.Text = lt.IDLoaiThuoc.ToString();
                 txtMaLoai.Text = lt.MaLoai;
                 txtTenLoai.Text = lt.TenLoai;
-                txtGhiChu.Text = lt.GhiChu;
+                dataGridView.Text = lt.GhiChu;
             }
         }
 
         private void RefreshGrid()
         {
-            txtGhiChu.DataSource = null;
-            txtGhiChu.DataSource = danhSach;
+            dataGridView.DataSource = null;
+            dataGridView.DataSource = danhSach;
         }
 
         private void ClearForm()
@@ -166,7 +170,7 @@ namespace WinFormsApp2
             txtLoaiThuoc.Clear();
             txtMaLoai.Clear();
             txtTenLoai.Clear();
-            txtGhiChu.ClearSelection();
+            dataGridView.ClearSelection();
             indexDangChon = -1;
         }
 
